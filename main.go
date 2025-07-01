@@ -11,17 +11,21 @@ import (
 func main() {
 	log := logger.NewLogger()
 	r := gin.Default()
-	ctrl := controller.NewTaskController(log)
+	HistoryCtrl := controller.NewHistoryController(log)
+	TaskCtrl := controller.NewTaskController(log,HistoryCtrl)
+	// Task CRUD
+	r.POST("/tasks/",TaskCtrl.AddTask)				// done
+	r.POST("/tasks/bulk",TaskCtrl.AddTaskBulk)		// done
+
+	r.GET("/tasks/",TaskCtrl.ShowTasks)				// done
+	r.GET("/tasks/:id",TaskCtrl.GetTask)			// done
 	
-	r.POST("/tasks/",ctrl.AddTask)				// done
-	r.POST("/tasks/bulk",ctrl.AddTaskBulk)		// done
+	r.PUT("tasks/:id",TaskCtrl.UpdateTask)			// done
 	
-	r.GET("/tasks/",ctrl.ShowTasks)				// done
-	r.GET("/tasks/:id",ctrl.GetTask)			// done
+	r.DELETE("tasks/:id",TaskCtrl.DeletedTask)		// done
+	r.DELETE("tasks/bulk",TaskCtrl.DeletedTaskBulk)	// done
 	
-	r.PUT("tasks/:id",ctrl.UpdateTask)			// done
-	
-	r.DELETE("tasks/:id",ctrl.DeletedTask)		// done
-	r.DELETE("tasks/bulk",ctrl.DeletedTaskBulk)	// in progress
+	// History
+	r.GET("/histories/",TaskCtrl.ShowHistorise)
 	r.Run(":8080")
 }
