@@ -1,7 +1,7 @@
 package controller
 
 import (
-	model "mymodule/model"
+	model "mymodule/Simple-Task-API/model"
 	"time"
 
 	"github.com/sirupsen/logrus"

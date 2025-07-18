@@ -2,17 +2,19 @@ package main
 
 import (
 	
-	"mymodule/logger"
-	"mymodule/controller"
+	"mymodule/Simple-Task-API/logger"
+	"mymodule/Simple-Task-API/controller"
 	"github.com/gin-gonic/gin"
 )
 
 
 func main() {
+	
 	log := logger.NewLogger()
 	r := gin.Default()
 	HistoryCtrl := controller.NewHistoryController(log)
 	TaskCtrl := controller.NewTaskController(log,HistoryCtrl)
+
 	// Task CRUD
 	r.POST("/tasks/",TaskCtrl.AddTask)				// done
 	r.POST("/tasks/bulk",TaskCtrl.AddTaskBulk)		// done

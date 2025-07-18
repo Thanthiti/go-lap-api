@@ -1,8 +1,8 @@
 package controller
 
 import (
-	model "mymodule/model"
-	response "mymodule/response"
+	model "mymodule/Simple-Task-API/model"
+	response "mymodule/Simple-Task-API/response"
 	"net/http"
 	"strconv"
 	"strings"
